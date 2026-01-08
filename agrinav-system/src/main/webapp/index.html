@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriNav System Dashboard</title>
+    <!-- CSSファイルの読み込み -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Leaflet（地図ライブラリ）の読み込み -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Chart.js（グラフライブラリ）の読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- ダッシュボード全体 -->
+    <div class="dashboard">
+        
+        <!-- ヘッダー部分 -->
+        <div class="header">
+            <h1>AgriNav System Dashboard</h1>
+            <div class="status">システム正常</div>
+        </div>
+        
+        <!-- LEDバー（速度表示） -->
+        <div class="led-bar">
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+        </div>
+        
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            
+            <!-- 左側：速度と距離の表示 -->
+            <div class="meters">
+                <!-- 速度メーター -->
+                <div class="meter-card">
+                    <h2>速度</h2>
+                    <div class="meter-value" id="speed">0.0</div>
+                    <div class="meter-unit">km/h</div>
+                </div>
+                
+                <!-- 距離メーター -->
+                <div class="meter-card">
+                    <h2>距離</h2>
+                    <div class="meter-value" id="distance">0.0</div>
+                    <div class="meter-unit">m</div>
+                </div>
+            </div>
+            
+            <!-- 右側：地図表示 -->
+            <div class="field-display">
+                <div id="map" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+        
+        <!-- コントロールボタン -->
+        <div class="controls">
+            <button class="btn btn-start" id="startBtn">開始</button>
+            <button class="btn btn-stop" id="stopBtn">停止</button>
+            <button class="btn btn-reset" id="resetBtn">リセット</button>
+        </div>
+        
+        <!-- グラフエリア -->
+        <div class="charts-container">
+            <!-- 速度のグラフ -->
+            <div class="chart-box">
+                <h3>速度の推移</h3>
+                <canvas id="speedChart"></canvas>
+            </div>
+            
+            <!-- 距離のグラフ -->
+            <div class="chart-box">
+                <h3>距離の推移</h3>
+                <canvas id="distanceChart"></canvas>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- JavaScriptファイルの読み込み -->
+    <script src="js/app.js"></script>
+</body>
+</html>
