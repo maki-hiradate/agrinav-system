@@ -7,8 +7,7 @@
 
 ## 📸 スクリーンショット
 
-（後でスクリーンショットを追加します）
-
+![AgriNav System Dashboard](https://github.com/user-attachments/assets/ebb03255-5802-46ef-956b-08d6e336dfb4)
 ## ✨ 主な機能
 
 - 📊 **リアルタイムデータ表示** - 速度と距離をメーター形式で表示
