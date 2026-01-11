@@ -11,9 +11,15 @@ import java.sql.SQLException;
 public class DatabaseUtil {
     
     // データベースの接続情報（あなたの環境に合わせて変更してください）
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/agriguide_db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root1234";
+	private static final String DB_URL = System.getenv("DATABASE_URL") != null 
+		    ? System.getenv("DATABASE_URL") 
+		    : "jdbc:mysql://localhost:3306/agrinav_db";
+		private static final String DB_USER = System.getenv("DB_USER") != null 
+		    ? System.getenv("DB_USER") 
+		    : "root";
+		private static final String DB_PASSWORD = System.getenv("DB_PASSWORD") != null 
+		    ? System.getenv("DB_PASSWORD") 
+		    : "root1234";
     
     /**
      * データベースに接続する
