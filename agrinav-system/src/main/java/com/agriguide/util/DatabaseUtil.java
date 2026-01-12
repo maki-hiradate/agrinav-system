@@ -4,57 +4,46 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * データベース接続を管理するクラス
- * このクラスを使ってデータベースに接続します
- */
 public class DatabaseUtil {
     
-    // データベースの接続情報（あなたの環境に合わせて変更してください）
-	private static final String DB_URL = System.getenv("DATABASE_URL") != null 
-		    ? System.getenv("DATABASE_URL") 
-		    : "jdbc:mysql://localhost:3306/agrinav_db";
-		private static final String DB_USER = System.getenv("DB_USER") != null 
-		    ? System.getenv("DB_USER") 
-		    : "root";
-		private static final String DB_PASSWORD = System.getenv("DB_PASSWORD") != null 
-		    ? System.getenv("DB_PASSWORD") 
-		    : "root1234";
+    // 環境変数からDATABASE_URLを取得（Render用）
+    private static final String DATABASE_URL = System.getenv("DATABASE_URL");
     
-    /**
-     * データベースに接続する
-     * @return Connection データベースへの接続
-     */
-    public static Connection getConnection() throws SQLException {
+    // ローカル開発用のMySQL設定
+    private static final String LOCAL_URL = "jdbc:mysql://localhost:3306/agrinav_db";
+    private static final String LOCAL_USER = "root";
+    private static final String LOCAL_PASSWORD = "root1234"; // ★ここを実際のパスワードに変更
+    
+    static {
         try {
-            // MySQLドライバーを読み込む
+            // PostgreSQLドライバーをロード（Render用）
+            Class.forName("org.postgresql.Driver");
+            // MySQLドライバーをロード（ローカル用）
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            // データベースに接続
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            System.out.println("✅ データベースに接続しました");
-            return conn;
-            
         } catch (ClassNotFoundException e) {
-            System.out.println("❌ MySQLドライバーが見つかりません");
-            throw new SQLException("ドライバーエラー", e);
-        } catch (SQLException e) {
-            System.out.println("❌ データベース接続エラー: " + e.getMessage());
-            throw e;
+            throw new RuntimeException("Database driver not found", e);
         }
     }
     
-    /**
-     * 接続を安全に閉じる
-     * @param conn 閉じる接続
-     */
-    public static void closeConnection(Connection conn) {
-        if (conn != null) {
+    public static Connection getConnection() throws SQLException {
+        // DATABASE_URL環境変数が設定されている場合（Render環境）
+        if (DATABASE_URL != null && !DATABASE_URL.isEmpty()) {
+            System.out.println("Connecting to PostgreSQL (Render)...");
+            // PostgreSQLの接続URLをそのまま使用
+            return DriverManager.getConnection(DATABASE_URL);
+        } else {
+            // ローカル環境（MySQL）
+            System.out.println("Connecting to MySQL (Local)...");
+            return DriverManager.getConnection(LOCAL_URL, LOCAL_USER, LOCAL_PASSWORD);
+        }
+    }
+    
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
             try {
-                conn.close();
-                System.out.println("✅ データベース接続を閉じました");
+                connection.close();
             } catch (SQLException e) {
-                System.out.println("⚠️ 接続を閉じる際にエラー: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
