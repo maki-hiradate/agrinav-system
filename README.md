@@ -10,7 +10,7 @@
 ![AgriNav System Dashboard](https://github.com/user-attachments/assets/ebb03255-5802-46ef-956b-08d6e336dfb4)
 ## 🎥 デモ動画
 
-[▶️ デモ動画を見る](https://youtu.be/RtYDaqQ_QQw)
+[▶️ デモ動画を見る](https://youtu.be/Bsbl4eGkLX4)
 
 ## ✨ 主な機能
 
