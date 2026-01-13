@@ -146,7 +146,7 @@ function updateLEDs(currentSpeed) {
 
 // センサーデータを取得
 function fetchSensorData() {
-    fetch('http://localhost:8080/agrinav-system/api/sensor-data')
+    fetch('/agrinav-system/api/sensor-data')
         .then(response => response.text())
         .then(data => {
             console.log('📊 センサーデータを取得:', data);
@@ -167,7 +167,7 @@ function fetchSensorData() {
 
 // 履歴データを取得してグラフを更新
 function fetchHistoryData() {
-    fetch('http://localhost:8080/agrinav-system/api/history-data?limit=10')
+    fetch('/agrinav-system/api/history-data?limit=10')
         .then(response => response.json())
         .then(data => {
             console.log('📊 履歴データを取得:', data.length + '件');
