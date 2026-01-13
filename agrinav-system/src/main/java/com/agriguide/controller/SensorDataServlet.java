@@ -1,20 +1,22 @@
 package com.agriguide.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.agriguide.model.SensorData;
 import com.agriguide.service.SensorDataService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * センサーデータAPIのコントローラー
  * /api/sensor-data にアクセスしたときの処理を担当します
  */
-@WebServlet("/api/sensor-data")
+@WebServlet("/agrinav-system/api/sensor-data")
 public class SensorDataServlet extends HttpServlet {
     
     private SensorDataService service;

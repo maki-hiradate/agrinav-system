@@ -1,22 +1,24 @@
 package com.agriguide.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import com.agriguide.model.TripData;
 import com.agriguide.service.TripDataService;
 import com.agriguide.util.JsonUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * 走行履歴データAPIのコントローラー
  * /api/history-data にアクセスしたときの処理を担当します
  */
-@WebServlet("/api/history-data")
+@WebServlet("/agrinav-system/api/history-data")
 public class HistoryDataServlet extends HttpServlet {
     
     private TripDataService service;
