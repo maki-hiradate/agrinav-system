@@ -1,9 +1,7 @@
 package com.agriguide.util;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 public class DatabaseUtil {
     
     // 環境変数からDATABASE_URLを取得（Render用）
@@ -29,8 +27,12 @@ public class DatabaseUtil {
         // DATABASE_URL環境変数が設定されている場合（Render環境）
         if (DATABASE_URL != null && !DATABASE_URL.isEmpty()) {
             System.out.println("Connecting to PostgreSQL (Render)...");
-            // PostgreSQLの接続URLをそのまま使用
-            return DriverManager.getConnection(DATABASE_URL);
+            // DATABASE_URLを JDBC形式に変換
+            String jdbcUrl = DATABASE_URL;
+            if (jdbcUrl.startsWith("postgresql://")) {
+                jdbcUrl = jdbcUrl.replace("postgresql://", "jdbc:postgresql://");
+            }
+            return DriverManager.getConnection(jdbcUrl);
         } else {
             // ローカル環境（MySQL）
             System.out.println("Connecting to MySQL (Local)...");
